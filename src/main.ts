@@ -1,6 +1,22 @@
 import { Author } from "./model/autor";
 import { Post } from "./model/post";
 import { Comment } from "./model/coment";
+interface DataProvider{
+
+    getPosts(): Promise<Post[]>;
+    getAutor(authorId:number):Promise<Author>;
+    getComments(postId: number):Promise<Comment>;
+}
+
+class Api {
+    postsSuffix: string = 'posts';
+  
+    constructor(public readonly apiUrl: string) {}
+  
+    public getPostsUrl(): string {
+      return `${this.apiUrl}/${this.postsSuffix}`;
+    }
+  }
 
 const apiUrl: string = "https://jsonplaceholder.typicode.com";
 
