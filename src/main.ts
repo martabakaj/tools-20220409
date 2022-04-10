@@ -1,34 +1,16 @@
+import { Author } from "./model/autor";
+import { Post } from "./model/post";
+import { Comment } from "./model/coment";
 
 const apiUrl: string = "https://jsonplaceholder.typicode.com";
 
 const postsUrl: string = apiUrl + '/posts';
 const commentsUrl: string = `${apiUrl}/comments`;
 const usersUrl: string = `${apiUrl}/users`;
-interface Author {
-    id: number;
-    name: string;
-    username: string;
-    email: string;
-}
-
-interface Post {
-   id: number;
-   userId: number;
-   title: string;
-   body: string;
-}
-
-interface Comment {
-    postId: number;
-    id: number;
-    name: string;
-    email: string;
-    body: string;
-   }
 
 async function setAuthor(authorId: number){
     const userUrl = `${usersUrl}/${authorId}`;
-    const user:Author = await getApiResponse(userUrl);
+    const user: Author = await getApiResponse(userUrl);
     const userElement = document.getElementById('author');
     userElement.classList.add('author');
     userElement.innerHTML = `<h3>${user.name} <small>(${user.email})</small></h3>`;
@@ -36,7 +18,7 @@ async function setAuthor(authorId: number){
 
   async function loadComments(postId: number): Promise<void> {
     const postCommentsUrl = `${commentsUrl}?postId=${postId}`;
-    const comments : Comment[]= await getApiResponse(`${postCommentsUrl}?postId=${postId}`);
+    const comments: Comment[]= await getApiResponse(`${postCommentsUrl}?postId=${postId}`);
     const commentsContainer = document.getElementById('comments');
     commentsContainer.innerHTML = '';
     for (const comment of comments) {
