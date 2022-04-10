@@ -1,9 +1,9 @@
-const apiUrl = 'https://jsonplaceholder.typicode.com';
+ const apiUrl = 'https://jsonplaceholder.typicode.com';
 
 const postsUrl = apiUrl + '/posts';
 const commentsUrl = `${apiUrl}/comments`;
 const usersUrl = `${apiUrl}/users`;
-let authorsUrl;
+//*let authorsUrl;
 
 async function getApiResponse(url) {
   const postsRequest = fetch(url);
@@ -18,10 +18,9 @@ async function setAuthor(authorId) {
   userElement.classList.add('author');
   userElement.innerHTML = `<h3>${user.name} <small>(${user.email})</small></h3>`;
 }
-
 async function loadComments(postId) {
   const postCommentsUrl = `${commentsUrl}?postId=${postId}`;
-  const comments = await getApiResponse(`${commentsUrl}?postId=${postId}`);
+  const comments = await getApiResponse(${postCommentsUrl}?postId=${postId});
   const commentsContainer = document.getElementById('comments');
   commentsContainer.innerHTML = '';
   for (const comment of comments) {
@@ -49,8 +48,7 @@ async function addListElement(post) {
   const listContainer = document.getElementById('list');
   listContainer.append(element);
 }
-
-document.addEventListener('DOMContentLoaded', event => {
+document.addEventListener('DOMContentLoaded', () => {
   const content = document.querySelector('#content');
 
   setTimeout(() => {
@@ -62,12 +60,13 @@ document.addEventListener('DOMContentLoaded', event => {
           addListElement(post);
         }
       })
-      .catch(error => {
-        loader.remove();
+      .catch(()) => {
+       
       })
       .finally(() => {
         const loader = document.querySelector('#spinner');
         loader.remove();
       });
   }, 2000);
-});
+};
+
